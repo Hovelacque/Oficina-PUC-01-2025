@@ -30,7 +30,7 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [ ] Flip para Esquerda
 - [ ] Criar Classe Sprite
 - [ ] Ajustar tamanho do sprite no render (height x width)
-- [ ]
+- [ ] Criar Classe Player e Enemy
 - [ ]
 - [ ]
 - [ ]

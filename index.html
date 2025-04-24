@@ -2,11 +2,13 @@
 
 <body>
     <img id="player" hidden src="Warrior_Red.png" />
+    <img id="goblin" hidden src="Torch_Blue.png" />
     <canvas></canvas>
     <script>
         const canvas = document.querySelector('canvas');
         const ctx = canvas.getContext('2d');
         const playerImg = document.querySelector('#player');
+        const globinImg = document.querySelector('#goblin');
 
         canvas.height = 512;
         canvas.width = 1024;
@@ -40,17 +42,17 @@
                 if (this.frames % 10 == 0)
                     this.column = this.column == this.wCount - 1 ? 0 : this.column + 1
 
+                ctx.save();
+                ctx.translate(this.flip ? this.x + this.wSprite : this.x, this.y);
+                ctx.scale(this.flip ? -1 : 1, 1);
                 ctx.drawImage(
                     this.img,
-                    this.wSprite * this.column,
-                    this.hSprite * this.row,
-                    this.wSprite,
-                    this.hSprite,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
+                    this.wSprite * this.column, this.hSprite * this.row,
+                    this.wSprite, this.hSprite,
+                    0, 0, //x e y são 0 por causa do translate
+                    this.width, this.height
                 )
+                ctx.restore();
             }
 
             update() {
@@ -59,47 +61,28 @@
             }
         }
 
-        // let frames = 0;
-        // let column = 0;
-
-        const s = new Sprite(
+        const player = new Sprite(
             canvas.width / 2, canvas.height / 2,
             playerImg,
             8, 6,
-            // 300, 300
+            // 192, 192
         )
+
+        const enemy = new Sprite(
+            canvas.width / 2 - 200, canvas.height / 2,
+            globinImg,
+            5, 7,
+            // 192, 192
+        ) 
 
         const animate = () => {
             requestAnimationFrame(animate);
 
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // const x = canvas.width / 2;
-            // const y = canvas.height / 2;
-            // const h = 8;
-            // const w = 6;
-            // const row = 2;
-            // const hSprite = playerImg.height / h;
-            // const wSprite = playerImg.width / w;
-            // const flipX = true;
-
-            // if (frames % 10 == 0)
-            //     column = column == w - 1 ? 0 : column + 1
-
-            // ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite, x, y,
-            //     wSprite, hSprite)
-
-            // ctx.save(); // Save the current transformation matrix
-            // ctx.translate(flipX ? x + wSprite : x, y + 100);
-            // ctx.scale(flipX ? -1 : 1, 1); // Flip horizontally if flipX is true
-            // ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite, 0, 0,
-            //     wSprite, hSprite)
-            // ctx.restore(); // Restore the saved transformation matrix
-
-            // frames++;
-
             s.update();
+            enemy.update();
         }
         animate();
 
