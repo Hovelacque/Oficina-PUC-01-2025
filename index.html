@@ -97,32 +97,22 @@
         class Enemy extends Sprite {
             constructor(x, y) {
                 super(x, y, globinImg, 5, 7) //192 x 192
-                this.velocity = 5
+                this.velocity = 3
             }
 
             update() {
-                if (
-                    movimentos.direita || movimentos.esquerda ||
-                    movimentos.cima || movimentos.baixo
-                ){
-                    this.rowAnimation = 1
-                    this.columnLimit = 5
-                }
-                else
-                    this.rowAnimation = 0
+                this.columnLimit = 5
+                this.rowAnimation = 1
 
-                if (movimentos.direita) {
-                    this.x += this.velocity;
-                    this.flipAnimation = false;
-                }
-                else if (movimentos.esquerda) {
-                    this.x -= this.velocity;
-                    this.flipAnimation = true;
-                }
-                if (movimentos.cima)
-                    this.y -= this.velocity
-                else if (movimentos.baixo)
-                    this.y += this.velocity
+                const xDistancia = player.x - this.x;
+                const yDistancia = player.y - this.y;
+                const angulo = Math.atan2(yDistancia, xDistancia);
+
+                const dx = Math.cos(angulo) * this.velocity
+                this.flipAnimation = dx < 0
+
+                this.x += dx
+                this.y += Math.sin(angulo) * this.velocity
 
                 super.update();
             }

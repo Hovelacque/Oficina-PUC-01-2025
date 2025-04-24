@@ -33,7 +33,10 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [ ] Criar Classe Player e Enemy
 - [ ] Movimentar Player
 - [ ] Animar movimentação
-- [ ] Movimentar e Animar Enemy
+- [ ] Movimentar e Animar Enemy ()
 - [ ] Criar movimentação automática do inimigo
-- [ ]
-- [ ]
+- [ ] Criar perimetro de ataque
+- [ ] Criar Vida e atacar
+- [ ] Animar ataque
+- [ ] Matar inimigo
+- [ ] Multiplicar inimigos
