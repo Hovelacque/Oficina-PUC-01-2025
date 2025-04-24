@@ -25,6 +25,7 @@
 
                 this.rowAnimation = 0;
                 this.column = 0 //current Frame
+                this.columnLimit = this.wCount - 1;
                 this.flipAnimation = false
                 this.frames = 0;
 
@@ -40,7 +41,7 @@
 
             draw() {
                 if (this.frames % 10 == 0)
-                    this.column = this.column == this.wCount - 1 ? 0 : this.column + 1
+                    this.column = this.column == this.columnLimit ? 0 : this.column + 1
 
                 ctx.save();
                 ctx.translate(this.flipAnimation ? this.x + this.wSprite : this.x, this.y);
@@ -96,6 +97,34 @@
         class Enemy extends Sprite {
             constructor(x, y) {
                 super(x, y, globinImg, 5, 7) //192 x 192
+                this.velocity = 5
+            }
+
+            update() {
+                if (
+                    movimentos.direita || movimentos.esquerda ||
+                    movimentos.cima || movimentos.baixo
+                ){
+                    this.rowAnimation = 1
+                    this.columnLimit = 5
+                }
+                else
+                    this.rowAnimation = 0
+
+                if (movimentos.direita) {
+                    this.x += this.velocity;
+                    this.flipAnimation = false;
+                }
+                else if (movimentos.esquerda) {
+                    this.x -= this.velocity;
+                    this.flipAnimation = true;
+                }
+                if (movimentos.cima)
+                    this.y -= this.velocity
+                else if (movimentos.baixo)
+                    this.y += this.velocity
+
+                super.update();
             }
         }
 
