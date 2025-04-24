@@ -23,9 +23,9 @@
                 this.hCount = hCount;
                 this.wCount = wCount;
 
-                this.row = 0;
+                this.rowAnimation = 0;
                 this.column = 0 //current Frame
-                this.flip = false
+                this.flipAnimation = false
                 this.frames = 0;
 
                 img.onload = () => {
@@ -43,11 +43,11 @@
                     this.column = this.column == this.wCount - 1 ? 0 : this.column + 1
 
                 ctx.save();
-                ctx.translate(this.flip ? this.x + this.wSprite : this.x, this.y);
-                ctx.scale(this.flip ? -1 : 1, 1);
+                ctx.translate(this.flipAnimation ? this.x + this.wSprite : this.x, this.y);
+                ctx.scale(this.flipAnimation ? -1 : 1, 1);
                 ctx.drawImage(
                     this.img,
-                    this.wSprite * this.column, this.hSprite * this.row,
+                    this.wSprite * this.column, this.hSprite * this.rowAnimation,
                     this.wSprite, this.hSprite,
                     0, 0, //x e y são 0 por causa do translate
                     this.width, this.height
@@ -64,6 +64,32 @@
         class Player extends Sprite {
             constructor(x, y) {
                 super(x, y, playerImg, 8, 6) //192 x 192
+                this.velocity = 5
+            }
+
+            update() {
+                if (
+                    movimentos.direita || movimentos.esquerda ||
+                    movimentos.cima || movimentos.baixo
+                )
+                    this.rowAnimation = 1
+                else
+                    this.rowAnimation = 0
+
+                if (movimentos.direita) {
+                    this.x += this.velocity;
+                    this.flipAnimation = false;
+                }
+                else if (movimentos.esquerda) {
+                    this.x -= this.velocity;
+                    this.flipAnimation = true;
+                }
+                if (movimentos.cima)
+                    this.y -= this.velocity
+                else if (movimentos.baixo)
+                    this.y += this.velocity
+
+                super.update();
             }
         }
 
@@ -75,6 +101,12 @@
 
         const player = new Player(100, 100)
         const enemy = new Enemy(300, 100)
+        const movimentos = {
+            cima: false,
+            baixo: false,
+            esquerda: false,
+            direita: false
+        }
 
         const animate = () => {
             requestAnimationFrame(animate);
@@ -85,6 +117,50 @@
             player.update();
             enemy.update();
         }
+
+        addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'w':
+                case 'ArrowUp':
+                    movimentos.cima = true;
+                    break;
+                case 'a':
+                case 'ArrowLeft':
+                    movimentos.esquerda = true;
+                    break;
+                case 's':
+                case 'ArrowDown':
+                    movimentos.baixo = true;
+                    break;
+                case 'd':
+                case 'ArrowRight':
+                    movimentos.direita = true;
+                    break;
+            }
+        })
+
+        addEventListener('keyup', (e) => {
+            switch (e.key) {
+                case 'w':
+                case 'ArrowUp':
+                    movimentos.cima = false;
+                    break;
+                case 'a':
+                case 'ArrowLeft':
+                    movimentos.esquerda = false;
+                    break;
+                case 's':
+                case 'ArrowDown':
+                    movimentos.baixo = false;
+                    break;
+                case 'd':
+                case 'ArrowRight':
+                    movimentos.direita = false;
+                    break;
+            }
+        })
+
+
         animate();
 
     </script>
@@ -106,11 +182,6 @@
 <body>
     <canvas></canvas>
     <script>
-        const canvas = document.querySelector('canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.height = 512;
-        canvas.width = 1024;
 
         let speedEnemy = 0.2;
         class Enemy {
@@ -401,50 +472,6 @@
             lifeBar.draw();
             enimies.forEach(item => item.update())
         }
-
-        addEventListener('keydown', (e) => {
-            speedEnemy = 2;
-            switch (e.key) {
-                case 'w':
-                case 'ArrowUp':
-                    movimentos.cima = true;
-                    break;
-                case 'a':
-                case 'ArrowLeft':
-                    movimentos.esquerda = true;
-                    break;
-                case 's':
-                case 'ArrowDown':
-                    movimentos.baixo = true;
-                    break;
-                case 'd':
-                case 'ArrowRight':
-                    movimentos.direita = true;
-                    break;
-            }
-        })
-
-        addEventListener('keyup', (e) => {
-            switch (e.key) {
-                case 'w':
-                case 'ArrowUp':
-                    movimentos.cima = false;
-                    break;
-                case 'a':
-                case 'ArrowLeft':
-                    movimentos.esquerda = false;
-                    break;
-                case 's':
-                case 'ArrowDown':
-                    movimentos.baixo = false;
-                    break;
-                case 'd':
-                case 'ArrowRight':
-                    movimentos.direita = false;
-                    break;
-            }
-        })
-
 
         addEventListener("touchstart", () => { });
         addEventListener("touchend", () => { player.addOrb() });

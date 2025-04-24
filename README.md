@@ -32,9 +32,8 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [ ] Ajustar tamanho do sprite no render (height x width)
 - [ ] Criar Classe Player e Enemy
 - [ ] Movimentar Player
-- [ ]
-- [ ]
-- [ ]
+- [ ] Animar movimentação
+- [ ] Movimentar e Animar Enemy
 - [ ]
 - [ ]
 - [ ]
