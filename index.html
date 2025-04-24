@@ -11,39 +11,95 @@
         canvas.height = 512;
         canvas.width = 1024;
 
-        let frames = 0;
-        let column = 0;
+        class Sprite {
+            constructor(x, y, img, hCount, wCount, height, width) {
+                this.x = x;
+                this.y = y;
+                this.img = img;
+                this.height = height;
+                this.width = width;
+                this.hCount = hCount;
+                this.wCount = wCount;
+
+                this.row = 0;
+                this.column = 0 //current Frame
+                this.flip = false
+                this.frames = 0;
+
+                img.onload = () => {
+                    this.hSprite = img.height / hCount;
+                    this.wSprite = img.width / wCount;
+                    if (!height)
+                        this.height = this.hSprite;
+                    if (!width)
+                        this.width = this.wSprite
+                }
+            }
+
+            draw() {
+                if (this.frames % 10 == 0)
+                    this.column = this.column == this.wCount - 1 ? 0 : this.column + 1
+
+                ctx.drawImage(
+                    this.img,
+                    this.wSprite * this.column,
+                    this.hSprite * this.row,
+                    this.wSprite,
+                    this.hSprite,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                )
+            }
+
+            update() {
+                this.frames++;
+                this.draw()
+            }
+        }
+
+        // let frames = 0;
+        // let column = 0;
+
+        const s = new Sprite(
+            canvas.width / 2, canvas.height / 2,
+            playerImg,
+            8, 6,
+            // 300, 300
+        )
+
         const animate = () => {
             requestAnimationFrame(animate);
 
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            const x = canvas.width / 2;
-            const y = canvas.height / 2;
-            const h = 8;
-            const w = 6;
-            const row = 2;
-            const hSprite = playerImg.height / h;
-            const wSprite = playerImg.width / w;
-            const flipX = true;
+            // const x = canvas.width / 2;
+            // const y = canvas.height / 2;
+            // const h = 8;
+            // const w = 6;
+            // const row = 2;
+            // const hSprite = playerImg.height / h;
+            // const wSprite = playerImg.width / w;
+            // const flipX = true;
 
-            if (frames % 10 == 0)
-                column = column == w - 1 ? 0 : column + 1
+            // if (frames % 10 == 0)
+            //     column = column == w - 1 ? 0 : column + 1
 
-                ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite,x, y,
-                wSprite, hSprite)
+            // ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite, x, y,
+            //     wSprite, hSprite)
 
-            ctx.save(); // Save the current transformation matrix
-            ctx.translate(flipX ? x + wSprite : x, y + 100);
-            ctx.scale(flipX ? -1 : 1, 1); // Flip horizontally if flipX is true
-            ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite,
-                0, 0,
-                //x, y,
-                wSprite, hSprite)
-            ctx.restore(); // Restore the saved transformation matrix
+            // ctx.save(); // Save the current transformation matrix
+            // ctx.translate(flipX ? x + wSprite : x, y + 100);
+            // ctx.scale(flipX ? -1 : 1, 1); // Flip horizontally if flipX is true
+            // ctx.drawImage(playerImg, wSprite * column, hSprite * row, wSprite, hSprite, 0, 0,
+            //     wSprite, hSprite)
+            // ctx.restore(); // Restore the saved transformation matrix
 
-            frames++;
+            // frames++;
+
+            s.update();
         }
         animate();
 

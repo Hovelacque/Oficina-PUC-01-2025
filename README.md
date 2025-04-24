@@ -19,8 +19,22 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
     - [Git](https://hovelacque.github.io/Oficina-puc-01-2025/)
     - [Code](https://hovelacque.github.io/Oficina-puc-01-2025/)
     - [Demo](https://hovelacque.github.io/Oficina-puc-01-2025/)
-    
+
 # Checklist
-- [X] Create map
-- [X] Project setup
-- [X] Pathfinding
+- [ ] Index simples
+- [ ] Carregar imagem do sprite
+- [ ] Criar canvas
+- [ ] Carregar imagem no canvas
+- [ ] Cortar imagem criando row e column
+- [ ] Animar personagem
+- [ ] Flip para Esquerda
+- [ ] Criar Classe Sprite
+- [ ] Ajustar tamanho do sprite no render (height x width)
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
