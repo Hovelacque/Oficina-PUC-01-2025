@@ -61,19 +61,20 @@
             }
         }
 
-        const player = new Sprite(
-            canvas.width / 2, canvas.height / 2,
-            playerImg,
-            8, 6,
-            // 192, 192
-        )
+        class Player extends Sprite {
+            constructor(x, y) {
+                super(x, y, playerImg, 8, 6) //192 x 192
+            }
+        }
 
-        const enemy = new Sprite(
-            canvas.width / 2 - 200, canvas.height / 2,
-            globinImg,
-            5, 7,
-            // 192, 192
-        ) 
+        class Enemy extends Sprite {
+            constructor(x, y) {
+                super(x, y, globinImg, 5, 7) //192 x 192
+            }
+        }
+
+        const player = new Player(100, 100)
+        const enemy = new Enemy(300, 100)
 
         const animate = () => {
             requestAnimationFrame(animate);
@@ -81,7 +82,7 @@
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            s.update();
+            player.update();
             enemy.update();
         }
         animate();
