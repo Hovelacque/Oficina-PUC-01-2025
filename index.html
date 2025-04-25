@@ -27,6 +27,7 @@
                 this.columnLimit = this.wCount - 1;
                 this.flipAnimation = false
                 this.frames = 0;
+                this.delayAnimation = 10;
 
                 this.img = new Image;
                 this.img.src = imgSrc;
@@ -41,11 +42,13 @@
             }
 
             draw() {
-                if (this.frames % 10 == 0)
+                if (this.frames % this.delayAnimation == 0)
                     this.column = this.column == this.columnLimit ? 0 : this.column + 1
 
                 ctx.save();
-                ctx.translate(this.flipAnimation ? this.x + this.wSprite : this.x, this.y);
+                const dx = this.x - this.hSprite / 2;
+                const dy = this.y - this.wSprite / 2;
+                ctx.translate(this.flipAnimation ? dx + this.wSprite : dx, dy);
                 ctx.scale(this.flipAnimation ? -1 : 1, 1);
                 ctx.drawImage(
                     this.img,
@@ -67,6 +70,16 @@
             constructor(x, y) {
                 super(x, y, "Warrior_Red.png", 8, 6) //192 x 192
                 this.velocity = 5
+                this.radiusAttack = 90
+            }
+
+            draw() {
+                ctx.strokeStyle = 'red';
+                ctx.beginPath()
+                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                ctx.stroke()
+
+                super.draw()
             }
 
             update() {
@@ -99,11 +112,22 @@
             constructor(x, y, speed) {
                 super(x, y, "Torch_Blue.png", 5, 7) //192 x 192
                 this.velocity = speed;
+                this.radiusAttack = 90
+            }
+
+            draw() {
+                ctx.strokeStyle = 'red';
+                ctx.beginPath()
+                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                ctx.stroke()
+
+                super.draw()
             }
 
             update() {
                 this.columnLimit = 5
                 this.rowAnimation = 1
+                this.delayAnimation = 10;
 
                 const xDistancia = player.x - this.x;
                 const yDistancia = player.y - this.y;
@@ -115,7 +139,26 @@
                 this.x += dx
                 this.y += Math.sin(angulo) * this.velocity
 
+                if (this.verificaAttack())
+                    this.attack()
+
                 super.update();
+            }
+
+            attack() {
+                this.rowAnimation = 2;
+                this.delayAnimation = 8;
+            }
+
+            verificaAttack() {
+                const xDistancia = player.x - this.x;
+                const yDistancia = player.y - this.y;
+                // const distance = Math.sqrt((xDistancia * xDistancia) + (yDistancia * yDistancia));
+                const distance = Math.hypot(xDistancia, yDistancia);
+
+                if (distance < this.radiusAttack + player.radiusAttack)
+                    return true
+                return false
             }
         }
 
