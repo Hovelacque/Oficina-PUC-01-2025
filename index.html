@@ -114,7 +114,8 @@
             constructor(x, y) {
                 super(x, y, "Warrior_Red.png", 8, 6) //192 x 192
                 this.velocity = 5
-                this.radiusAttack = 90
+                this.radiusAttack = 90;
+                this.power = 20;
                 this.life = 100;
             }
 
@@ -128,6 +129,7 @@
             }
 
             update() {
+                this.delayAnimation = 10;
                 if (
                     movimentos.direita || movimentos.esquerda ||
                     movimentos.cima || movimentos.baixo
@@ -149,7 +151,32 @@
                 else if (movimentos.baixo)
                     this.y += this.velocity
 
+                if (this.verificaAttack(enemy))
+                    this.attack(enemy)
+
                 super.update();
+            }
+
+            attack(enemy) {
+                this.rowAnimation = 2;
+                this.delayAnimation = 5;
+                if (this.frames % 8 == 0)
+                    enemy.hit(this.power);
+            }
+
+            verificaAttack(enemy) {
+                const xDistancia = enemy.x - this.x;
+                const yDistancia = enemy.y - this.y;
+                const distance = Math.hypot(xDistancia, yDistancia);
+                if (distance < this.radiusAttack + enemy.radiusAttack)
+                    return true
+                return false
+            }
+
+            hit(power) {
+                this.life -= power
+                if (this.life <= 0)
+                    gameover = true
             }
         }
 
@@ -159,6 +186,8 @@
                 this.velocity = speed;
                 this.radiusAttack = 90;
                 this.power = 5;
+                this.life = 100;
+                this.die = false;
             }
 
             draw() {
@@ -171,6 +200,9 @@
             }
 
             update() {
+                if (this.die)
+                    return
+
                 this.columnLimit = 5
                 this.rowAnimation = 1
                 this.delayAnimation = 10;
@@ -194,11 +226,8 @@
             attack() {
                 this.rowAnimation = 2;
                 this.delayAnimation = 8;
-                if (this.frames % 10 == 0) {
-                    player.life -= this.power
-                    if (player.life <= 0)
-                        gameover = true
-                }
+                if (this.frames % 10 == 0)
+                    player.hit(this.power);
             }
 
             verificaAttack() {
@@ -210,6 +239,13 @@
                 if (distance < this.radiusAttack + player.radiusAttack)
                     return true
                 return false
+            }
+
+            hit(power) {
+                this.life -= power;
+                if (this.life <= 0) {
+                    this.die = true;
+                }
             }
         }
 
