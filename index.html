@@ -112,13 +112,13 @@
 
         class Player extends Sprite {
             constructor(x, y) {
-                super(x, y, "Warrior_Purple.png", 8, 6) //192 x 192
+                super(x, y, "Warrior_Red.png", 8, 6) //192 x 192
                 this.velocity = 5
                 this.radiusAttack = 70;
                 this.power = 20;
                 this.life = 100;
             }
-
+/*
             draw() {
                 ctx.strokeStyle = 'red';
                 ctx.beginPath()
@@ -126,7 +126,7 @@
                 ctx.stroke()
                 super.draw()
             }
-
+*/
             update() {
                 this.delayAnimation = 10;
                 if (
@@ -190,7 +190,7 @@
                 this.life = 100;
                 this.die = false;
             }
-
+/*
             draw() {
                 ctx.strokeStyle = 'red';
                 ctx.beginPath()
@@ -198,7 +198,7 @@
                 ctx.stroke()
                 super.draw()
             }
-
+*/
             update() {
                 if (this.die)
                     return
