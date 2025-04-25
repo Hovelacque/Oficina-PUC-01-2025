@@ -14,10 +14,9 @@
         canvas.width = 1024;
 
         class Sprite {
-            constructor(x, y, img, hCount, wCount, height, width) {
+            constructor(x, y, imgSrc, hCount, wCount, height, width) {
                 this.x = x;
                 this.y = y;
-                this.img = img;
                 this.height = height;
                 this.width = width;
                 this.hCount = hCount;
@@ -29,9 +28,11 @@
                 this.flipAnimation = false
                 this.frames = 0;
 
-                img.onload = () => {
-                    this.hSprite = img.height / hCount;
-                    this.wSprite = img.width / wCount;
+                this.img = new Image;
+                this.img.src = imgSrc;
+                this.img.onload = () => {
+                    this.hSprite = this.img.height / hCount;
+                    this.wSprite = this.img.width / wCount;
                     if (!height)
                         this.height = this.hSprite;
                     if (!width)
@@ -64,7 +65,7 @@
 
         class Player extends Sprite {
             constructor(x, y) {
-                super(x, y, playerImg, 8, 6) //192 x 192
+                super(x, y, "Warrior_Red.png", 8, 6) //192 x 192
                 this.velocity = 5
             }
 
@@ -95,9 +96,9 @@
         }
 
         class Enemy extends Sprite {
-            constructor(x, y) {
-                super(x, y, globinImg, 5, 7) //192 x 192
-                this.velocity = 3
+            constructor(x, y, speed) {
+                super(x, y, "Torch_Blue.png", 5, 7) //192 x 192
+                this.velocity = speed;
             }
 
             update() {
@@ -119,7 +120,7 @@
         }
 
         const player = new Player(100, 100)
-        const enemy = new Enemy(300, 100)
+        const enemy = new Enemy(300, 100, 0)
         const movimentos = {
             cima: false,
             baixo: false,

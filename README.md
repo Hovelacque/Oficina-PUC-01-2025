@@ -34,8 +34,8 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [ ] Movimentar Player
 - [ ] Animar movimentação
 - [ ] Movimentar e Animar Enemy ()
-- [ ] Criar movimentação automática do inimigo
-- [ ] Criar perimetro de ataque
+- [X] Criar movimentação automática do inimigo
+- [ ] Criar perimetro de ataque (Ajustar offset)
 - [ ] Criar Vida e atacar
 - [ ] Animar ataque
 - [ ] Matar inimigo
