@@ -114,16 +114,16 @@
             constructor(x, y) {
                 super(x, y, "Warrior_Red.png", 8, 6) //192 x 192
                 this.velocity = 5
-                this.radiusAttack = 90;
+                this.radiusAttack = 70;
                 this.power = 20;
                 this.life = 100;
             }
 
             draw() {
-                ctx.strokeStyle = 'red';
-                ctx.beginPath()
-                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
-                ctx.stroke()
+                // ctx.strokeStyle = 'red';
+                // ctx.beginPath()
+                // ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                // ctx.stroke()
 
                 super.draw()
             }
@@ -151,8 +151,10 @@
                 else if (movimentos.baixo)
                     this.y += this.velocity
 
-                if (this.verificaAttack(enemy))
-                    this.attack(enemy)
+                enimies.forEach((enemy) => {
+                    if (this.verificaAttack(enemy))
+                        this.attack(enemy)
+                })
 
                 super.update();
             }
@@ -185,16 +187,16 @@
                 super(x, y, "Torch_Blue.png", 5, 7) //192 x 192
                 this.velocity = speed;
                 this.radiusAttack = 90;
-                this.power = 5;
+                this.power = 2;
                 this.life = 100;
                 this.die = false;
             }
 
             draw() {
-                ctx.strokeStyle = 'red';
-                ctx.beginPath()
-                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
-                ctx.stroke()
+                // ctx.strokeStyle = 'red';
+                // ctx.beginPath()
+                // ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                // ctx.stroke()
 
                 super.draw()
             }
@@ -251,7 +253,7 @@
 
         const player = new Player(100, 100)
         const lifeBar = new LifeBar(10, 10);
-        const enemy = new Enemy(300, 100, 0)
+        // const enemy = new Enemy(300, 100, 0)
         const movimentos = {
             cima: false,
             baixo: false,
@@ -259,16 +261,16 @@
             direita: false
         }
 
-        // const enimies = []
-        // function spawnEnemies() {
-        //     for (let i = 0; i <= 10; i++) {
-        //         const x = Math.random() * canvas.width;
-        //         const y = Math.random() * canvas.height;
-        //         const s = Math.random() * 3;
-        //         enimies.push(new Enemy(x, y, s))
-        //     }
-        // }
-        // spawnEnemies()
+        const enimies = []
+        function spawnEnemies() {
+            for (let i = 0; i <= 10; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const s = Math.random() * 3;
+                enimies.push(new Enemy(x, y, s))
+            }
+        }
+        spawnEnemies()
 
         const animate = () => {
             if (!gameover)
@@ -278,10 +280,9 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             player.update();
-            enemy.update();
+            // enemy.update();
+            enimies.forEach(item => item.update())
             lifeBar.draw();
-
-            // enimies.forEach(item => item.update())
         }
 
         addEventListener('keydown', (e) => {
