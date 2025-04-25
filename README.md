@@ -21,22 +21,28 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
     - [Demo](https://hovelacque.github.io/Oficina-puc-01-2025/)
 
 # Checklist
-- [ ] Index simples
-- [ ] Carregar imagem do sprite
-- [ ] Criar canvas
-- [ ] Carregar imagem no canvas
-- [ ] Cortar imagem criando row e column
-- [ ] Animar personagem
-- [ ] Flip para Esquerda
-- [ ] Criar Classe Sprite
-- [ ] Ajustar tamanho do sprite no render (height x width)
-- [ ] Criar Classe Player e Enemy
-- [ ] Movimentar Player
-- [ ] Animar movimentação
-- [ ] Movimentar e Animar Enemy ()
-- [ ] Criar movimentação automática do inimigo
-- [ ] Criar perimetro de ataque (Ajustar offset e velocidade de animação)
-- [ ] Criar Vida e atacar
-- [ ] Animar ataque
-- [ ] Matar inimigo
-- [ ] Multiplicar inimigos
+- [X] Index simples
+- [X] Carregar imagem do sprite
+- [X] Criar canvas
+- [X] Carregar imagem no canvas
+- [X] Cortar imagem criando row e column
+- [X] Animar personagem
+- [X] Flip para Esquerda
+- [X] Criar Classe Sprite
+- [X] Ajustar tamanho do sprite no render (height x width)
+- [X] Criar Classe Player e Enemy
+- [X] Movimentar Player
+- [X] Animar movimentação
+- [X] Movimentar e Animar Enemy ()
+- [X] Criar movimentação automática do inimigo
+- [X] Criar perimetro de ataque (Ajustar offset e velocidade de animação)
+- [X] Criar Vida e atacar
+- [X] Animar ataque
+- [X] Matar inimigo
+- [X] Multiplicar inimigos
+- [ ] Dropar Cura
+- [ ] Fazer tela de Game over
+- [ ] Efeitos sonoros
+- [ ] Colocar um fundo
+- [ ] Inimigos nascerem longe do player
+- [ ] Jogar pelo celular
