@@ -41,7 +41,7 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [X] Matar inimigo
 - [X] Multiplicar inimigos
 - [X] Dropar Cura
-- [ ] Fazer tela de Game over
+- [X] Fazer tela de Game over
 - [ ] Efeitos sonoros
 - [ ] Colocar um fundo
 - [ ] Inimigos nascerem longe do player
