@@ -182,12 +182,33 @@
 
         class Enemy extends Sprite {
             constructor(x, y, speed) {
-                super(x, y, "Torch_Blue.png", 5, 7) //192 x 192
+                let tipo = "Torch_Blue.png"
+                switch (speed) {
+                    case 2: tipo = "Torch_Purple.png"; break;
+                    case 3: tipo = "Torch_Yellow.png"; break;
+                    case 4: tipo = "Torch_Red.png"; break;
+                }
+                super(x, y, tipo, 5, 7) //192 x 192
                 this.velocity = speed;
                 this.radiusAttack = 60;
-                this.power = 2;
-                this.life = 100;
+                this.power = 5;
+                this.life = 200;
                 this.die = false;
+
+                switch (speed) {
+                    case 2:
+                        this.power = 4;
+                        this.life = 160;
+                        break;
+                    case 3:
+                        this.power = 3;
+                        this.life = 120;
+                        break;
+                    case 4:
+                        this.power = 2;
+                        this.life = 100;
+                        break;
+                }
             }
             /*
                         draw() {

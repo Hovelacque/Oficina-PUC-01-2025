@@ -45,7 +45,7 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [X] Fazer tela de inicio
 - [X] Centralizar player
 - [X] Inimigos nascerem longe do player
+- [X] Multiplos inimigos
 - [ ] Bordas bloqueando saida da tela
-- [ ] Multiplos inimigos
 - [ ] Efeitos sonoros
 - [ ] Jogar pelo celular
