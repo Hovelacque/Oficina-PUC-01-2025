@@ -45,4 +45,5 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [ ] Efeitos sonoros
 - [ ] Colocar um fundo
 - [ ] Inimigos nascerem longe do player
+- [ ] Multiplos inimigos
 - [ ] Jogar pelo celular

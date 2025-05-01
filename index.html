@@ -9,7 +9,6 @@
         const ctx = canvas.getContext('2d');
         const playerImg = document.querySelector('#player');
         const globinImg = document.querySelector('#goblin');
-        let gameover = false;
 
         canvas.height = 512;
         canvas.width = 1024;
@@ -118,15 +117,15 @@
                 this.power = 20;
                 this.life = 100;
             }
-/*
-            draw() {
-                ctx.strokeStyle = 'red';
-                ctx.beginPath()
-                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
-                ctx.stroke()
-                super.draw()
-            }
-*/
+            /*
+                        draw() {
+                            ctx.strokeStyle = 'red';
+                            ctx.beginPath()
+                            ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                            ctx.stroke()
+                            super.draw()
+                        }
+            */
             update() {
                 this.delayAnimation = 10;
                 if (
@@ -177,7 +176,7 @@
             hit(power) {
                 this.life -= power
                 if (this.life <= 0)
-                    gameover = true
+                    location.href = 'game_over.html'
             }
         }
 
@@ -190,15 +189,15 @@
                 this.life = 100;
                 this.die = false;
             }
-/*
-            draw() {
-                ctx.strokeStyle = 'red';
-                ctx.beginPath()
-                ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
-                ctx.stroke()
-                super.draw()
-            }
-*/
+            /*
+                        draw() {
+                            ctx.strokeStyle = 'red';
+                            ctx.beginPath()
+                            ctx.arc(this.x, this.y, this.radiusAttack, 0, Math.PI * 2)
+                            ctx.stroke()
+                            super.draw()
+                        }
+            */
             update() {
                 if (this.die)
                     return
@@ -272,8 +271,7 @@
         }
 
         const animate = () => {
-            if (!gameover)
-                requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
 
             if (enimies.length == 0)
                 spawnEnemies()
