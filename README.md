@@ -43,7 +43,9 @@ Trabalho final desenvolvido com os alunos de Ciência da Computação da PUC Min
 - [X] Dropar Cura
 - [X] Fazer tela de Game over
 - [X] Fazer tela de inicio
-- [ ] Efeitos sonoros
-- [ ] Inimigos nascerem longe do player
+- [X] Centralizar player
+- [X] Inimigos nascerem longe do player
+- [ ] Bordas bloqueando saida da tela
 - [ ] Multiplos inimigos
+- [ ] Efeitos sonoros
 - [ ] Jogar pelo celular
